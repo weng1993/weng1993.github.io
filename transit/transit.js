@@ -529,6 +529,7 @@ function getMyLocation() {
             lng = position.coords.longitude;
  
        		me = new google.maps.LatLng(lat, lng);
+       		content = "<h2>You are here</h2>";
        		Data("http://mbtamap.herokuapp.com//mapper/find_closest_stations?lat=" + me.lat + "&lon=" + me.lng, closeReady);
 
         });
@@ -552,5 +553,5 @@ function closeReady(){
 		content += "<p>There is no MBTA train station near you.</p>";
 	}
 	infowindow.setContent(content);
-	infowindow.open;		
+	infowindow.open;
 }
