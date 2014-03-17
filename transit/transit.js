@@ -23,7 +23,9 @@ function init() {
 		// Create the markers
 	tico = "t_icon.png";
 	railico = "rail.png";
-	getMyLocation();
+	getMyLocation();	
+	stations = JSON.parse("convetcsv.json");
+
 		pt = new google.maps.LatLng(42.352271, -71.05524200000001);
 		markers.push(new google.maps.Marker({position: pt, title: "South Station", icon: tico}));
 		pt = new google.maps.LatLng(42.330154, -71.057655);
@@ -462,8 +464,6 @@ function init() {
 
 
 
-
-
 	// Render markers to map
 	for (var m in markers) {
 
@@ -473,7 +473,6 @@ function init() {
 			google.maps.event.addListener(markers[m], 'click', function() {
 				stopName = this.title;
 				mvcObj = this;
-
 				content = "<strong>" + stopName + "</strong>";
 				Data("http://mbtamap.herokuapp.com/mapper/station_schedule.json?stop_name="+stopName, dataReady);
 				//modify content in dataready
@@ -497,7 +496,6 @@ function dataReady()
 	if (request.readyState == 4 && request.status == 200)
 	{	
 		data = JSON.parse(request.responseText);
-
 		if(data.length > 0){
 			content += '<table border="1" id="schedule"><tr><th>Line</th><th>Trip #</th><th>Direction</th><th>Time Remaining</th></tr>';
 
