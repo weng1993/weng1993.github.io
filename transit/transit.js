@@ -461,22 +461,6 @@ function init() {
 
 	getMyLocation();
 
-	loadJSON(function(response) {
-			// Create the markers
-		tico = "t_icon.png";
-		railico = "rail.png";
-	  	stations = JSON.parse(response);
-	  	console.log(stations);
-		for(var s in stations){
-			if (s.line =="Red"){
-				redline.push(s);
-			}
-			pt = new google.maps.LatLng(s.lat, s.lng);
-			markers.push(new google.maps.Marker({position: pt, title: s.title, icon: tico}));
-		}
-	});	
-
-
 
 	// Render markers to map
 	for (var m in markers) {
