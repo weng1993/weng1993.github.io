@@ -527,7 +527,7 @@ function getMyLocation() {
         navigator.geolocation.getCurrentPosition(function(position) {
             lat = position.coords.latitude;
             lng = position.coords.longitude;
-            content = "<h5>You are here. The closest T station is" + station + ", and is " + distance + "miles away.";
+ 
        		me = new google.maps.LatLng(lat, lng);
        		Data("http://mbtamap.herokuapp.com//mapper/find_closest_stations?lat=" + me.lat + "&lon=" + me.lng, closeReady);
 
@@ -544,10 +544,13 @@ function closeReady(){
 		closest = JSON.parse(request.responseText);
 		if (closest.length > 0) {
 			closestPt = new google.maps.LatLng(closest[0]['station']['stop_lat'], closest[0]['station']['stop_lon']);
-			contents += "<p>The closest station to you is <strong>" + closest[0]['station']['stop_name'] + "</strong> which is approximately " + closest[0]['station']['distance'] + " miles away from you.";
+			content += "<p>The closest station to you is <strong>" + closest[0]['station']['stop_name'] + "</strong> which is approximately " + closest[0]['station']['distance'] + " miles away from you.";
+
 		}
 	}
 	else if(request.readyState == 4 && request.status == 500) {
-		contents += "<p>There is no MBTA train station near you.</p>";
+		content += "<p>There is no MBTA train station near you.</p>";
 	}
+	infowindow.setContent(content);
+	infowindow.open;		
 }
