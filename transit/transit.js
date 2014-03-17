@@ -531,7 +531,7 @@ function getMyLocation() {
        		me = new google.maps.LatLng(lat, lng);
        		content = "<h2>You are here</h2>";
        		Data("http://mbtamap.herokuapp.com//mapper/find_closest_stations?lat=" + me.lat + "&lon=" + me.lng, closeReady);
-	infowindow.setContent(content);
+
 			infowindow.open(map, new google.maps.Marker({position: me, map: map, title : "Me"}));
         });
     }
@@ -553,5 +553,5 @@ function closeReady(){
 	else if(request.readyState == 4 && request.status == 500) {
 		content += "<p>There is no MBTA train station near you.</p>";
 	}
-
+	infowindow.setContent(content);
 }
