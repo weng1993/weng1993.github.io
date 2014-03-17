@@ -527,11 +527,9 @@ function getMyLocation() {
         navigator.geolocation.getCurrentPosition(function(position) {
             lat = position.coords.latitude;
             lng = position.coords.longitude;
- 			console.log(lat);
- 			console.log(lng);
        		me = new google.maps.LatLng(lat, lng);
        		content = "<h2>You are here</h2>";
-       		Data("http://mbtamap.herokuapp.com//mapper/find_closest_stations?lat=" + me.lat + "&lon=" + me.lng, closeReady);
+       		Data("http://mbtamap.herokuapp.com//mapper/find_closest_stations?lat=" + lat + "&lon=" + lng, closeReady);
 
 
         });
