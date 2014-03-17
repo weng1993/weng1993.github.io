@@ -533,11 +533,12 @@ function getMyLocation() {
             lat = position.coords.latitude;
             lng = position.coords.longitude;
             content = "<h2>You are here</h2>";
+       		pt = new google.maps.LatLng(lat, lng);
+        	infowindow.setContent(content);
+        	infowindow.open(map, new google.maps.Marker({position: pt, map: map, title: "me"}));
         });
         console.log("Made the call to get location");
-        infowindow.setContent(content);
-       	pt = new google.maps.LatLng(lat, lng);
-		infowindow.open(map, new google.maps.Marker({position: pt, map: map, title: "me"}));
+
     }
     else {
         alert("Geolocation is not supported by your web browser.  What a shame!");
