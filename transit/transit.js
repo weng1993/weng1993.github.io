@@ -26,6 +26,7 @@ function init() {
 		tico = "t_icon.png";
 		railico = "rail.png";
 	  	stations = JSON.parse(response);
+	  	console.log(stations);
 		for(var s in stations){
 			if (s.line =="Red"){
 				redline.push(s);
