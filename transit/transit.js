@@ -475,7 +475,7 @@ function init() {
 				mvcObj = this;
 
 				content = "<strong>" + stopName + "</strong>";
-				Data("http://mbtamap.herokuapp.com/mapper/station_schedule.json?stop_name="+stopName);
+				Data("http://mbtamap.herokuapp.com/mapper/station_schedule.json?stop_name="+stopName, dataReady);
 				//modify content in dataready
 
 			
@@ -483,11 +483,11 @@ function init() {
 	}
 }	
 
-function Data(url)
+function Data(url, ready)
 {
 	request = new XMLHttpRequest();
 	request.open("GET", url, true);
-	request.onreadystatechange = dataReady;
+	request.onreadystatechange = ready;
 	request.send(null);
 	
 }
@@ -529,11 +529,25 @@ function getMyLocation() {
             lng = position.coords.longitude;
             content = "<h5>You are here. The closest T station is" + station + ", and is " + distance + "miles away.";
        		me = new google.maps.LatLng(lat, lng);
-        	infowindow.setContent(content);
-        	infowindow.open(map, new google.maps.Marker({position: me, map: map, title: "me"}));
+       		Data("http://mbtamap.herokuapp.com//mapper/find_closest_stations?lat=" + me.lat + "&lon=" + me.lng, closeReady);
+
         });
     }
     else {
         alert("Geolocation is not supported by your web browser.  What a shame!");
     }
+}
+
+function closeReady(){
+	if (request.readyState == 4 && request.status == 200)
+	{
+		closest = JSON.parse(request.responseText);
+		if (closest.length > 0) {
+			closestPt = new google.maps.LatLng(closest[0]['station']['stop_lat'], closest[0]['station']['stop_lon']);
+			contents += "<p>The closest station to you is <strong>" + closest[0]['station']['stop_name'] + "</strong> which is approximately " + closest[0]['station']['distance'] + " miles away from you.";
+		}
+	}
+	else if(request.readyState == 4 && request.status == 500) {
+		contents += "<p>There is no MBTA train station near you.</p>";
+	}
 }
