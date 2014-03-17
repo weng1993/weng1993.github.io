@@ -457,7 +457,7 @@ function init() {
 		markers.push(new google.maps.Marker({position: pt, title: "Silver Hill", icon: railico}));
 		pt = new google.maps.LatLng(42.459, -71.06944799999999);
 		markers.push(new google.maps.Marker({position: pt, title: "Melrose Cedar Park", icon: railico}));
->>>>>>> parent of 3a2a878... Using json 1.1
+
 
 	getMyLocation();
 
