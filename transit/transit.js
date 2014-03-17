@@ -497,7 +497,6 @@ function dataReady()
 	if (request.readyState == 4 && request.status == 200)
 	{	
 		data = JSON.parse(request.responseText);
-		console.log(data.length);
 
 		if(data.length > 0){
 			content += '<table border="1" id="schedule"><tr><th>Line</th><th>Trip #</th><th>Direction</th><th>Time Remaining</th></tr>';
@@ -523,22 +522,16 @@ function dataReady()
 }
 
 function getMyLocation() {
-    lat = -99999;
-    lng = -99999;
     if (navigator.geolocation) {
         // the navigator.geolocation object is supported on your browser
-        console.log("Call before navigator.geolocation");
         navigator.geolocation.getCurrentPosition(function(position) {
-            console.log("Got location");
             lat = position.coords.latitude;
             lng = position.coords.longitude;
-            content = "<h2>You are here</h2>";
-       		pt = new google.maps.LatLng(lat, lng);
+            content = "<h5>You are here. The closest T station is" + station + ", and is " + distance + "miles away.";
+       		me = new google.maps.LatLng(lat, lng);
         	infowindow.setContent(content);
-        	infowindow.open(map, new google.maps.Marker({position: pt, map: map, title: "me"}));
+        	infowindow.open(map, new google.maps.Marker({position: me, map: map, title: "me"}));
         });
-        console.log("Made the call to get location");
-
     }
     else {
         alert("Geolocation is not supported by your web browser.  What a shame!");
