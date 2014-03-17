@@ -549,9 +549,13 @@ function closeReady(){
 			content += "<p>The closest station to you is <strong>" + closest[0]['station']['stop_name'] + "</strong> which is approximately " + closest[0]['station']['distance'] + " miles away from you.";
 
 		}
+		else{
+			content += "<p>There is no MBTA train station near you.</p>";
+		}
+
 	}
 	else if(request.readyState == 4 && request.status == 500) {
-		content += "<p>There is no MBTA train station near you.</p>";
+		content += "<p>Whoops, something went wrong!  Alas, cannot find closest MBTA train station to you.</p>";
 	}
 	infowindow.setContent(content);
 	infowindow.open(map, new google.maps.Marker({position: me, map: map, title : "Me"}));
