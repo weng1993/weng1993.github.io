@@ -18,8 +18,6 @@ function init() {
 	// Create the map in the "map_canvas" <div>
 	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-<<<<<<< HEAD
-=======
 		// Create the markers
 	tico = "t_icon.png";
 	railico = "rail.png";
