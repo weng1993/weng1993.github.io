@@ -12,7 +12,6 @@
 	<title>地图官网展示效果</title>
 </head>
 <body>
-	<a id="golist" href="../demolist.htm">返回demo列表页</a>
 	<div id="allmap"></div>
 </body>
 </html>
@@ -22,10 +21,6 @@
 	var point = new BMap.Point(116.404, 39.915); // 创建点坐标
 	map.centerAndZoom('杭州', 14); 
 	map.addControl(new BMap.ZoomControl());      //添加地图缩放控件
-	function showInfo(e){
-		alert(e.point.lng + ", " + e.point.lat);
-	}
-	map.addEventListener("click", showInfo);
 
 </script>
 <lbs-geo id="geo" city="北京" enable-modified="false"></lbs-geo>
